@@ -1,0 +1,60 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    17:29:22 05/02/2024 
+-- Design Name: 
+-- Module Name:    add - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity add is
+    Port ( a : in  STD_LOGIC_VECTOR (3 downto 0);
+           b : in  STD_LOGIC_VECTOR (3 downto 0);
+           cin : in  STD_LOGIC;
+           s : out  STD_LOGIC_VECTOR (3 downto 0);
+           carry : out  STD_LOGIC);
+end add;
+
+architecture Behavioral of add is
+
+component add4 is
+Port (     a : in  STD_LOGIC;
+           b : in  STD_LOGIC;
+           c : in  STD_LOGIC;
+           sum : out  STD_LOGIC;
+           carry : out  STD_LOGIC);
+end component;
+
+signal x1,x2,x3: std_logic;
+
+begin
+Y1:add4 port map(a(0),b(0),cin,s(0),x1);
+Y2:add4 port map(a(1),b(1),x1,s(1),x2);
+Y3:add4 port map(a(2),b(2),x2,s(2),x3);
+Y4:add4 port map(a(3),b(3),x3,s(3),carry);
+
+
+end Behavioral;
+
