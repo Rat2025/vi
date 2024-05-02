@@ -1,0 +1,85 @@
+----------------------------------------------------------------------------------
+-- Company: 
+-- Engineer: 
+-- 
+-- Create Date:    18:20:14 05/02/2024 
+-- Design Name: 
+-- Module Name:    ula - Behavioral 
+-- Project Name: 
+-- Target Devices: 
+-- Tool versions: 
+-- Description: 
+--
+-- Dependencies: 
+--
+-- Revision: 
+-- Revision 0.01 - File Created
+-- Additional Comments: 
+--
+----------------------------------------------------------------------------------
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+use IEEE.STD_LOGIC_ARITH.ALL;
+use IEEE.STD_LOGIC_UNSIGNED.ALL;
+use IEEE.NUMERIC_STD.ALL;
+
+
+-- Uncomment the following library declaration if using
+-- arithmetic functions with Signed or Unsigned values
+--use IEEE.NUMERIC_STD.ALL;
+
+-- Uncomment the following library declaration if instantiating
+-- any Xilinx primitives in this code.
+--library UNISIM;
+--use UNISIM.VComponents.all;
+
+entity ula is
+    Port ( a : in  STD_LOGIC_VECTOR (7 downto 0);
+           b : in  STD_LOGIC_VECTOR (7 downto 0);
+           cin : in  STD_LOGIC;
+           s : in  STD_LOGIC_VECTOR (3 downto 0);
+           y : out  STD_LOGIC_VECTOR (7 downto 0));
+end ula;
+
+architecture Behavioral of ula is
+
+begin
+process(a,b,cin,s)
+begin
+if(s="0000")then
+y<=a;
+elsif(s="0001")then
+y<=(a+1);
+elsif(s="0010")then
+y<=(a-1);
+elsif(s="0011")then
+y<=b;
+elsif(s="0100")then
+y<=(b+1);
+elsif(s="0101")then
+y<=(b-1);
+elsif(s="0110")then
+y<=(a+b);
+elsif(s="0111")then
+y<=(a+b+cin);
+elsif(s="1000")then
+y<=( NOT a);
+elsif(s="1001")then
+y<=(NOT b);
+elsif(s="1010")then
+y<=(a AND b);
+elsif(s="1011")then
+y<=( a OR b);
+elsif(s="1100")then
+y<=( a NAND b);
+elsif(s="1101")then
+y<=( a NOR b);
+elsif(s="1110")then
+y<=(a XOR b);
+else
+y<= ( a XNOR b);
+end if;
+end process;
+
+end Behavioral;
+
