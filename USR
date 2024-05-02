@@ -1,0 +1,36 @@
+
+library IEEE;
+use IEEE.STD_LOGIC_1164.ALL;
+
+entity sreg is
+    Port ( a : in  STD_LOGIC_VECTOR (3 downto 0);
+           rin : in  STD_LOGIC;
+           lin : in  STD_LOGIC;
+           clk : in  STD_LOGIC;
+           clr : in  STD_LOGIC;
+           s : in  STD_LOGIC_VECTOR (1 downto 0);
+           y : out  STD_LOGIC_VECTOR (3 downto 0));
+end sreg;
+
+architecture Behavioral of sreg is
+
+begin
+process(a,rin,lin,clk,clr,s)
+begin
+if(clr='1') then
+ y<="0000";
+
+else
+if(clk='1') then
+if(s="00") then y<="0000";
+elsif(s="01") then y<=(rin & a(3) & a(2) & a(1));
+elsif(s="10") then y<=( a(2) & a(1) & a(0) & lin);
+else y<=a;
+end if;
+end if;
+end if;
+end process;
+
+
+end Behavioral;
+
