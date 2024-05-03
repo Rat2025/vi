@@ -1,0 +1,67 @@
+module mealy1011(clk,rst,inp,outp);
+input clk,rst,inp;
+output reg outp;
+reg [1:0] cst,nst;
+parameter S0=2'b00, S1=2'b01, S2=2'b10, S3=2'b11;
+
+always @(posedge clk or posedge rst)
+begin
+if(rst)
+cst<=S0;
+else
+cst<=nst;
+end
+
+always @(cst,inp)
+begin
+case(cst)
+
+S0: if(inp)
+nst<=S1;
+else
+nst<=S0;
+S1: if(inp)
+nst<=S1;
+else
+nst<=S2;
+S2: if(inp)
+nst<=S3;
+else
+nst<=S0;
+S3: if(inp)
+nst<=S1;
+else
+nst<=S2;
+endcase
+end
+
+always @(cst,inp)
+begin 
+case(cst)
+S0: if(inp)
+outp<=0;
+else
+outp<=0;
+S1: if(inp)
+outp<=0;
+else
+outp<=0;
+S2: if(inp)
+outp<=0;
+else
+outp<=0;
+S3: if(inp)
+outp<=1;
+else
+outp<=0;
+endcase
+endmodule
+
+
+
+
+
+
+
+
+
